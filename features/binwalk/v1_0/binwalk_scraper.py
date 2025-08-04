@@ -1,3 +1,8 @@
+import subprocess
+import json
+import os
+from pathlib import Path
+
 from jinja2 import Template
 
 from app.core.feature_interface import BaseFeature
@@ -12,8 +17,9 @@ def register():
 
 class Feature(BaseFeature):
     def run(self, file_path) -> str:
-        print("Running Feature_2")
-        print("Hello from Feature_2.0.0! This is a feature that is part of the app's default installation.")
+        if not file_path or not os.path.isfile(file_path):
+            return "<p>No file selected or invalid path.</p>"
+        
 
         template_str = """
         <h2>Feature_2</h2>
